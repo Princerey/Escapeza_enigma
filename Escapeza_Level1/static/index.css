@@ -13,6 +13,7 @@ body{
     font-family: 'Poppins', sans-serif;
     margin: 20px;
     margin-left: 50px;
+    min-height: 100vh;
     /* text-align: ; */
 }
 .btn{
