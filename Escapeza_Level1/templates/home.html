@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Checker</title>
+    <link rel="stylesheet" href="/static/index.css">
+    <script type="text/javascript">
+        function startTimer() {
+            var timerDisplay = document.getElementById('timer');
+            var timeLeft = timerDisplay.innerText;
+            if (timeLeft > 0) {
+                setTimeout(startTimer, 1000);
+                timerDisplay.innerText = timeLeft - 1;
+            } else {
+                document.getElementById('check_button').disabled = false;
+
+
+            }
+        }
+    </script>
+</head>
+<body onload="startTimer()">
+    <h1>Check your team</h1>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% else %}
+        {% if penalty_message %}
+        <p>{{ penalty_message }}</p>
+        <p>Time left: <span id="timer">{{ time_left }}</span> seconds.</p>
+        <form method="post">
+            {% csrf_token %}
+            <label for="side1">Member 1:</label>
+            <input type="number" id="side1" name="side1" required><br><br>
+            <label for="side2">Member 2:</label>
+            <input type="number" id="side2" name="side2" required><br><br>
+            <label for="side3">Member 3:</label>
+            <input type="number" id="side3" name="side3" required><br><br>
+            
+            <button class="btn" style="padding: 10px 20px;
+            background: #000;
+            color: aliceblue;
+            border-radius: 20px !important; " type="submit" id="check_button" disabled>Check</button>
+        </form>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <label for="side1">Member 1:</label>
+            <input type="number" id="side1" name="side1" required><br><br>
+            <label for="side2">Member 2:</label>
+            <input type="number" id="side2" name="side2" required><br><br>
+            <label for="side3">Member 3:</label>
+            <input type="number" id="side3" name="side3" required><br><br>
+            <button class="btn" style="padding: 10px 20px;
+            background: #000;
+            color: aliceblue;
+            border-radius: 20px !important; " type="submit" id="check_button">Check</button>
+        </form>
+    {% endif %}
+    {% endif %}
+</body>
+</html>
